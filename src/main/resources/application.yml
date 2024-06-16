@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: api
+
+plaid:
+  clientId: ${PLAID_CLIENT_ID}
+  secret: ${PLAID_SECRET}
