@@ -9,7 +9,6 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 
 @Service
 public class PlaidService {
@@ -47,11 +46,15 @@ public class PlaidService {
         }
     }
 
-    public String exchangePublicToken(String publicToken) throws IOException {
-        ItemPublicTokenExchangeRequest request = new ItemPublicTokenExchangeRequest().publicToken(publicToken);
+    public String exchangePublicToken(ExchangeToken exchangeToken) throws IOException {
+        ItemPublicTokenExchangeRequest request = new ItemPublicTokenExchangeRequest()
+                .publicToken(exchangeToken.getPublic_token())
+                .clientId(exchangeToken.getClient_id())
+                .secret(exchangeToken.getSecret());
         Response<ItemPublicTokenExchangeResponse> response = plaidApi.itemPublicTokenExchange(request).execute();
 
         if (response.isSuccessful()) {
+            System.out.println(response.body().getAccessToken());
             return response.body().getAccessToken();
         } else {
             throw new IOException("Failed to exchange public token: " + response.errorBody().string());
