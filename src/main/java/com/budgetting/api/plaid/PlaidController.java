@@ -1,6 +1,8 @@
 package com.budgetting.api.plaid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -23,6 +25,6 @@ public class PlaidController {
 
     @PostMapping("/item/public_token/exchange")
     public String exchangePublicToken(@RequestBody ExchangeToken token) throws IOException {
-        return plaidService.exchangePublicToken(token);
+        return plaidService.exchangePublicToken(token.getPublic_token());
     }
 }

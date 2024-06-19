@@ -4,6 +4,8 @@ import com.plaid.client.ApiClient;
 import com.plaid.client.model.*;
 import com.plaid.client.request.PlaidApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
@@ -46,11 +48,9 @@ public class PlaidService {
         }
     }
 
-    public String exchangePublicToken(ExchangeToken exchangeToken) throws IOException {
+    public String exchangePublicToken(String token) throws IOException {
         ItemPublicTokenExchangeRequest request = new ItemPublicTokenExchangeRequest()
-                .publicToken(exchangeToken.getPublic_token())
-                .clientId(exchangeToken.getClient_id())
-                .secret(exchangeToken.getSecret());
+                .publicToken(token);
         Response<ItemPublicTokenExchangeResponse> response = plaidApi.itemPublicTokenExchange(request).execute();
 
         if (response.isSuccessful()) {
