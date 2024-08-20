@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://10.0.2.2:8080")
+@CrossOrigin(origins = "http://192.168.1.9:8080")
 @RestController
 public class PlaidController {
 

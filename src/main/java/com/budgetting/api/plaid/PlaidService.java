@@ -34,7 +34,7 @@ public class PlaidService {
                 .language("en")
                 .webhook("https://example.com/webhook")
                 .linkCustomizationName("default")
-                .androidPackageName("com.plaid.linksample");
+                .androidPackageName("com.budgetapp.budgetapp");
 
         Response<LinkTokenCreateResponse> response = plaidApi.linkTokenCreate(request).execute();
 
