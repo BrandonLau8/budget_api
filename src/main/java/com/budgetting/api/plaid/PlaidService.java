@@ -48,14 +48,16 @@ public class PlaidService {
         }
     }
 
-    public String exchangePublicToken(String token) throws IOException {
+    public AccessToken exchangePublicToken(String token) throws IOException {
         ItemPublicTokenExchangeRequest request = new ItemPublicTokenExchangeRequest()
                 .publicToken(token);
         Response<ItemPublicTokenExchangeResponse> response = plaidApi.itemPublicTokenExchange(request).execute();
 
         if (response.isSuccessful()) {
+            assert response.body() != null;
+            AccessToken accessToken = new AccessToken(response.body());
             System.out.println(response.body().getAccessToken());
-            return response.body().getAccessToken();
+            return accessToken;
         } else {
             throw new IOException("Failed to exchange public token: " + response.errorBody().string());
         }
