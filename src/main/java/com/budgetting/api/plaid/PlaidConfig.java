@@ -39,7 +39,7 @@ public class PlaidConfig {
     @Bean
     public PlaidApi plaidApi(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080") // Use the appropriate base URL for sandbox or production
+                .baseUrl("http://192.168.1.9:8080") // Use the appropriate base URL for sandbox or production
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

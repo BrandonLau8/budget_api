@@ -93,7 +93,7 @@ public class PlaidService {
         }
     }
 
-    public Response<TransactionsSyncResponse> syncTransaction(String accessToken) throws IOException {
+    public TransactionsSyncResponse syncTransaction(String accessToken) throws IOException {
 
         // Provide a cursor from your database if you've previously
         // recieved one for the item leave null if this is your
@@ -117,18 +117,20 @@ public class PlaidService {
                     .options(options)
                     .count(2);
 
-            Response<TransactionsSyncResponse> response = plaidApi.transactionsSync(request).execute();
+        retrofit2.Response<TransactionsSyncResponse> retrofitResponse = plaidApi.transactionsSync(request).execute();
+        TransactionsSyncResponse response = retrofitResponse.body();
+//            TransactionsSyncResponse response = plaidApi.transactionsSync(request).execute().body();
 
             // Add this page of results
-            assert response.body() != null;
-            added.addAll(response.body().getAdded());
+            assert response != null;
+            added.addAll(response.getAdded());
 
-            hasMore = response.body().getHasMore();
+            hasMore = response.getHasMore();
             // Update cursor to the next cursor
-            cursor = response.body().getNextCursor();
+            cursor = response.getNextCursor();
 
 //            System.out.println(response);
-            System.out.println(response.body());
+            System.out.println(response);
 //
 //            finalResponse.setAdded(response.body().getAdded());
 //

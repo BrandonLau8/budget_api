@@ -9,6 +9,8 @@ import com.plaid.client.model.Transaction;
 import com.plaid.client.model.TransactionsGetResponse;
 import com.plaid.client.model.TransactionsSyncResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -44,8 +46,8 @@ public class PlaidController {
     }
 
     @PostMapping("/transactions/sync")
-    public Response<TransactionsSyncResponse> syncTransaction(@RequestParam String access_token) throws IOException {
-        return plaidService.syncTransaction(access_token);
+    public ResponseEntity<TransactionsSyncResponse> syncTransaction(@RequestParam String access_token) throws IOException {
+        return new ResponseEntity<>(plaidService.syncTransaction(access_token), HttpStatus.OK);
     }
 
 //    @PostMapping("/transactions/get")
