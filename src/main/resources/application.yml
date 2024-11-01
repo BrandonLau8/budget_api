@@ -5,3 +5,6 @@ spring:
 plaid:
   clientId: ${PLAID_CLIENT_ID}
   secret: ${PLAID_SECRET}
+
+google:
+  clientId: ${GOOGLE_CLIENT_ID}
