@@ -34,57 +34,49 @@ public class GoogleIDToken {
     }
 
 // (Receive idTokenString by HTTPS POST)
-public ResponseEntity<CustomCredential> validateIdToken(String idToken) {
+public ResponseEntity<PayloadDto> validateIdToken(String idToken) {
     try {
         // Validate the ID token
         GoogleIdToken token = verifier.verify(idToken);
         System.out.println("Token: " + token);
+        CustomCredential response = new CustomCredential();
         if (token != null) {
             // Token is valid, return success response
-            CustomCredential response = new CustomCredential();
             PayloadDto payloadDto = new PayloadDto();
+            Payload payload = token.getPayload();
 
-            if (token != null) {
-                Payload payload = token.getPayload();
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
 
-                // Print user identifier
-                String userId = payload.getSubject();
-                System.out.println("User ID: " + userId);
+            // Get profile information from payload
+            String email = payload.getEmail();
+            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+            String name = (String) payload.get("name");
+            String pictureUrl = (String) payload.get("picture");
+            String locale = (String) payload.get("locale");
+            String familyName = (String) payload.get("family_name");
+            String givenName = (String) payload.get("given_name");
 
-                // Get profile information from payload
-                String email = payload.getEmail();
-                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-                String name = (String) payload.get("name");
-                String pictureUrl = (String) payload.get("picture");
-                String locale = (String) payload.get("locale");
-                String familyName = (String) payload.get("family_name");
-                String givenName = (String) payload.get("given_name");
+            // Use or store profile information
+            // ...
+            payloadDto.setSub(userId);
+            payloadDto.setName(givenName);
+            payloadDto.setEmail(email);
+            response.setPayloadDto(payloadDto);
 
-                // Use or store profile information
-                // ...
-                payloadDto.setEmail(email);
-                payloadDto.setName(name);
-                payloadDto.setSub(userId);
-                response.setPayloadDto(payloadDto);
-//                response.getPayloadDto().setEmail(email);
-//                response.getPayloadDto().setName(name);
-//                response.getPayloadDto().setSub(userId);
-//                response.getData().setMessage("Token is valid");
-            } else {
-                System.out.println("Invalid ID token.");
-            }
-            return ResponseEntity.ok(response);
+            System.out.println("Token: " + token);
+            return ResponseEntity.ok(payloadDto);
         } else {
             // Token is invalid
-            CustomCredential errorResponse = new CustomCredential();
-//            errorResponse.getData().setMessage("Invalid Token");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+            //            errorResponse.getData().setMessage("Invalid Token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     } catch (Exception e) {
         // Handle exceptions (e.g., logging, error messages)
         CustomCredential errorResponse = new CustomCredential();
 //        errorResponse.getData().setMessage(e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }
 

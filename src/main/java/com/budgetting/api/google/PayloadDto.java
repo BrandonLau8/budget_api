@@ -1,6 +1,8 @@
 package com.budgetting.api.google;
 
-@lombok.Data
+import lombok.Data;
+
+@Data
 public class PayloadDto {
     private String sub;
     private String email;

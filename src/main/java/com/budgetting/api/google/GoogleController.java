@@ -1,6 +1,8 @@
 package com.budgetting.api.google;
 
+import com.google.api.client.auth.oauth.OAuthCredentialsResponse;
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class GoogleController {
     }
 
     @PostMapping("/validate_id_token")
-    public ResponseEntity<CustomCredential> validateIdToken(@RequestParam String idToken) throws IOException {
+    public ResponseEntity<PayloadDto> validateIdToken(@RequestParam String idToken) throws IOException {
 //        String idToken = credential.getAccessToken();
         return googleIDToken.validateIdToken(idToken);
     }
