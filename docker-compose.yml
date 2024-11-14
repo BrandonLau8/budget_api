@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  your-service:
+    image: myapp:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - plaid_client_id
+      - plaid_secret
+    environment:
+      PLAID_CLIENT_ID: /run/secrets/plaid_client_id
+      PLAID_SECRET: /run/secrets/plaid_secret
+secrets:
+  plaid_client_id:
+    external: true
+  plaid_secret:
+    external: true

@@ -9,6 +9,7 @@ import com.plaid.client.ApiClient;
 import com.plaid.client.model.*;
 import com.plaid.client.request.PlaidApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -30,7 +31,7 @@ public class PlaidService {
         this.plaidApi = apiClient.createService(PlaidApi.class);
     }
 
-    public LinkToken createLinkToken() throws IOException {
+    public ResponseEntity<LinkToken> createLinkToken() throws IOException {
         LinkTokenCreateRequestUser user = new LinkTokenCreateRequestUser().clientUserId("clientUserId");
 
         LinkTokenCreateRequest request = new LinkTokenCreateRequest()
@@ -46,9 +47,10 @@ public class PlaidService {
 
         if (response.isSuccessful()) {
 //            return response.body().getLinkToken();
+            assert response.body() != null;
             LinkToken linkToken = new LinkToken(response.body().getLinkToken());
             System.out.println(linkToken);
-            return linkToken;
+            return ResponseEntity.ok(linkToken);
         } else {
             throw new IOException("Failed to create Link token: " + response.errorBody().string());
         }

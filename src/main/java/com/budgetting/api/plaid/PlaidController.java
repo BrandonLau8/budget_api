@@ -31,7 +31,7 @@ public class PlaidController {
     }
 
     @PostMapping("/link/token/create")
-    public LinkToken createLinkToken() throws IOException {
+    public ResponseEntity<LinkToken> createLinkToken() throws IOException {
         return plaidService.createLinkToken();
     }
 
