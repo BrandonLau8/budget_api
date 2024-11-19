@@ -1,36 +1,46 @@
 package com.budgetting.api.plaid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Data
-@Getter
-@Setter
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
 @Component
+@ConfigurationProperties(prefix = "plaid")
 public class PlaidProperties {
 
-    @Value("${PLAID_CLIENT_ID}")
-    private final String clientId;
 
-    @Value("${PLAID_SECRET}")
-    private final String secret;
+    private String clientId;
 
-//    public PlaidProperties(Dotenv dotenv) {
-//        this.clientId = dotenv.get("PLAID_CLIENT_ID");
-//        this.secret = dotenv.get("PLAID_SECRET");
-//    }
+    private String secret;
 
+    // No-argument constructor
+    public PlaidProperties() {}
 
     public PlaidProperties(String clientId, String secret) {
         this.clientId = clientId;
         this.secret = secret;
     }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Plaid Client ID: " + clientId);
+        System.out.println("Plaid Secret: " + secret);
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
 
     public String getClientId() {
         return clientId;
@@ -38,5 +48,9 @@ public class PlaidProperties {
 
     public String getSecret() {
         return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }

@@ -1,18 +1,23 @@
-version: "3.7"
-
+version: '3.9'
 services:
-  your-service:
-    image: myapp:latest
-    deploy:
-      replicas: 1
-    secrets:
-      - plaid_client_id
-      - plaid_secret
+  budgetting-api:
+    image: app:latest
+    build:
+      context: .
     environment:
       PLAID_CLIENT_ID: /run/secrets/plaid_client_id
       PLAID_SECRET: /run/secrets/plaid_secret
+      GOOGLE_CLIENT_ID: /run/secrets/google_client_id
+    secrets:
+      - plaid_client_id
+      - plaid_secret
+    ports:
+      - "8080:8080"
+
 secrets:
   plaid_client_id:
-    external: true
+    file: ./credentials/plaid_client_id.txt
   plaid_secret:
-    external: true
+      file: ./credentials/plaid_secret.txt
+  google_client_id:
+      file: ./credentials/google_client_id.txt

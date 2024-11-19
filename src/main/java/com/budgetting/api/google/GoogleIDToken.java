@@ -18,14 +18,12 @@ import java.util.Collections;
 @Component
 public class GoogleIDToken {
 
-    private final GoogleProperties googleProperties;
     private final HttpTransport transport = new NetHttpTransport();
     private final JsonFactory jsonFactory = new GsonFactory();
     private final GoogleIdTokenVerifier verifier;
 
     // Inject GoogleProperties through the constructor
     public GoogleIDToken(GoogleProperties googleProperties) {
-        this.googleProperties = googleProperties;
 
         // Initialize verifier after googleProperties is set
         this.verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)

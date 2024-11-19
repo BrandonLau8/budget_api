@@ -3,7 +3,6 @@ package com.budgetting.api.plaid;
 import com.budgetting.api.AuthInterceptor;
 import com.plaid.client.ApiClient;
 import com.plaid.client.request.PlaidApi;
-import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

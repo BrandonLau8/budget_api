@@ -3,8 +3,8 @@ spring:
     name: api
 
 plaid:
-  clientId: ${PLAID_CLIENT_ID}
-  secret: ${PLAID_SECRET}
+    clientId: ${PLAID_CLIENT_ID:/run/secrets/plaid_client_id}
+    secret: ${PLAID_SECRET:/run/secrets/plaid_secret}
 
 google:
-  clientId: ${GOOGLE_CLIENT_ID}
+  clientId: ${GOOGLE_CLIENT_ID:/run/secrets/google_client_id}
