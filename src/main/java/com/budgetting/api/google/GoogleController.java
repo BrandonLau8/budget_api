@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = {"http://192.168.1.23:8080"})
+//@CrossOrigin(origins = {"http://192.168.1.23:8080"})
+@CrossOrigin(origins = {"http://173.52.45.250:8080","http://173.52.45.250:8080", "https://budgetting-api-56751984313.us-east4.run.app"})
 @RestController
 public class GoogleController {
 
@@ -23,7 +24,9 @@ public class GoogleController {
 
     @PostMapping("/validate_id_token")
     public ResponseEntity<PayloadDto> validateIdToken(@RequestParam String idToken) throws IOException {
+        System.out.println(idToken);
 //        String idToken = credential.getAccessToken();
+
         return googleIDToken.validateIdToken(idToken);
     }
 }

@@ -1,0 +1,6 @@
+plaid:
+  clientIdPath: ${PLAID_CLIENT_ID:/run/secrets/plaid_client_id}
+  secretPath: ${PLAID_SECRET:/run/secrets/plaid_secret}
+
+google:
+  clientIdPath: ${GOOGLE_CLIENT_ID:/run/secrets/google_client_id}

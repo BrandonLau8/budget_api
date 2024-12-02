@@ -21,13 +21,6 @@ import java.util.HashMap;
 @Configuration
 public class PlaidConfig {
 
-//    @Value("${plaid.clientId}")
-//    private String plaidClientId;
-//
-//    @Value("${plaid.secret}")
-//    private String plaidSecret;
-
-
     @Bean
     public OkHttpClient okHttpClient(AuthInterceptor authInterceptor) {
         return new OkHttpClient.Builder()
@@ -38,7 +31,7 @@ public class PlaidConfig {
     @Bean
     public PlaidApi plaidApi(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.23:8080") // Use the appropriate base URL for sandbox or production
+                .baseUrl("https://budgetting-api-56751984313.us-east4.run.app/") // Use the appropriate base URL for sandbox or production
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

@@ -19,7 +19,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://192.168.1.23:8080", "https://sandbox.plaid.com"})
+//@CrossOrigin(origins = {"http://192.168.1.23:8080", "https://sandbox.plaid.com"})
+@CrossOrigin(origins = {"http://173.52.45.250:8080", "https://budgetting-api-56751984313.us-east4.run.app", "https://sandbox.plaid.com"})
 @RestController
 public class PlaidController {
 

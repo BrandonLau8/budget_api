@@ -1,0 +1,8 @@
+plaid:
+#    clientIdPath: ${PLAID_CLIENT_ID:projects/56751984313/secrets/plaid_client_id/versions/latest}
+#    secretPath: ${PLAID_SECRET:projects/56751984313/secrets/plaid_secret/versions/latest}
+    clientId: ${PLAID_CLIENT_ID_:default_plaid_client_id}
+    secret: ${PLAID_SECRET_:default_plaid_secret}
+google:
+#    clientIdPath: ${GOOGLE_CLIENT_ID:projects/56751984313/secrets/google_client_id/versions/latest}
+    clientId: ${GOOGLE_CLIENT_ID_:default_google_client_id}

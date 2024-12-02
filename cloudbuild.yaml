@@ -1,0 +1,16 @@
+steps:
+  # Step 1: Build the JAR file
+  - name: 'maven:3.8.1-jdk-17-slim'
+    args: ['mvn', 'clean', 'package', '-DskipTests']
+
+  # Step 2: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/budgetapp-439217/budgetting-api'
+      - '.'
+
+# Optional: Push the Docker image to Container Registry
+images:
+  - 'gcr.io/budgetapp-439217/budgetting-api'

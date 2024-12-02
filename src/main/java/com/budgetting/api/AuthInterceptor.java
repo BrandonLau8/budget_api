@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class AuthInterceptor implements Interceptor {
     private final PlaidProperties plaidProperties;
 
-    @Autowired
+//    @Autowired
     public AuthInterceptor(PlaidProperties plaidProperties) {
         this.plaidProperties = plaidProperties;
     }
@@ -32,4 +32,6 @@ public class AuthInterceptor implements Interceptor {
 
         return chain.proceed(newRequest);
     }
+
+
 }

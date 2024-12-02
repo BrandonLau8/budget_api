@@ -8,6 +8,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ public class GoogleIDToken {
     private final GoogleIdTokenVerifier verifier;
 
     // Inject GoogleProperties through the constructor
+    @Autowired
     public GoogleIDToken(GoogleProperties googleProperties) {
 
         // Initialize verifier after googleProperties is set
@@ -33,10 +35,13 @@ public class GoogleIDToken {
 
 // (Receive idTokenString by HTTPS POST)
 public ResponseEntity<PayloadDto> validateIdToken(String idToken) {
-    try {
+
+        try {
         // Validate the ID token
         GoogleIdToken token = verifier.verify(idToken);
-        System.out.println("Token: " + token);
+        System.out.println("After verify: " + token);
+
+
         CustomCredential response = new CustomCredential();
         if (token != null) {
             // Token is valid, return success response
